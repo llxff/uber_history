@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "ICS",
-  "dependencies": {
+  "devDependencies": {
     "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "phoenix": "file:deps/phoenix",
+    "phoenix_html": "file:deps/phoenix_html"
   }
 }
