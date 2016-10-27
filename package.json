@@ -1,0 +1,9 @@
+{
+  "name": "uber_history",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "ICS",
+  "dependencies": {
+    "webpack": "^1.13.3"
+  }
+}
