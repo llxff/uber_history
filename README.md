@@ -1,6 +1,6 @@
 # Uber History
 
-How much you spend money with Uber?
+How much do you spend with Uber?
 
 To start application:
 

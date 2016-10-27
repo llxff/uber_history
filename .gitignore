@@ -17,5 +17,8 @@ erl_crash.dump
 .idea
 uberhistory.iml
 node_modules
+<<<<<<< HEAD
 config/dex.exs
 config/test.exs
+=======
+>>>>>>> master
