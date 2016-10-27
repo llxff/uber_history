@@ -11,9 +11,8 @@ config :uber_history, UberHistory.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [
-    node: ["node_modules/webpack/bin/webpack.js", "--watch", "--color", cd: Path.expand("../", __DIR__)]
-  ]
+  watchers: []
+
 
 # Watch static and templates for browser reloading.
 config :uber_history, UberHistory.Endpoint,
@@ -37,6 +36,7 @@ config :phoenix, :stacktrace_depth, 20
 config :uber_history, UberHistory.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
+  password: "postgres",
   database: "uber_history_dev",
-  hostname: "192.168.56.102",
+  hostname: "localhost",
   pool_size: 10

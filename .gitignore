@@ -17,3 +17,5 @@ erl_crash.dump
 .idea
 uberhistory.iml
 node_modules
+config/dex.exs
+config/test.exs
