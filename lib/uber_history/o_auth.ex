@@ -25,12 +25,9 @@ defmodule UberHistory.OAuth do
     OAuth2.Client.authorize_url!(client(), scope: @scope)
   end
 
-  # you can pass options to the underlying http library via `opts` parameter
   def get_token!(params \\ [], headers \\ [], opts \\ []) do
     OAuth2.Client.get_token!(client(), params, headers, opts)
   end
-
-  # Strategy Callbacks
 
   def authorize_url(client, params) do
     OAuth2.Strategy.AuthCode.authorize_url(client, params)
