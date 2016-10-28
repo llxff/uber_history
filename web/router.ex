@@ -7,7 +7,12 @@ defmodule UberHistory.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug :assign_current_user
+    plug :assign_uber_client
+  end
+
+  defp assign_uber_client(conn, _) do
+    client = UberHistory.OAuth.client(get_session(conn, :access_token))
+    assign(conn, :oauth_client, client)
   end
 
   scope "/", UberHistory do
@@ -22,9 +27,5 @@ defmodule UberHistory.Router do
     get "/", AuthController, :index
     get "/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
-  end
-
-  defp assign_current_user(conn, _) do
-    assign(conn, :current_user, get_session(conn, :current_user))
   end
 end

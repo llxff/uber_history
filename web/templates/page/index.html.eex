@@ -1,15 +1,13 @@
-<header class="header">
-  <%= if @current_user do %>
-    <p><%= @current_user["first_name"] %></p>
-    <img src="<%= @current_user["picture"] %>"/>
-    <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-  <% else %>
-    <br>
-    <br>
+<%= if @current_user do %>
+  <p><%= @current_user["first_name"] %></p>
+  <img src="<%= @current_user["picture"] %>"/>
+  <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+<% else %>
+  <br>
+  <br>
 
-    <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index %>">
-      <i class="fa fa-google"></i>
-      Sign in with Uber
-    </a>
-  <% end %>
-</header>
+  <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index %>">
+    <i class="fa fa-google"></i>
+    Sign in with Uber
+  </a>
+<% end %>

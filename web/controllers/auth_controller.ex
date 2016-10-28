@@ -15,12 +15,7 @@ defmodule UberHistory.AuthController do
   def callback(conn, %{"code" => code}) do
     client = UberHistory.OAuth.get_token!(code: code)
 
-    %{body: user} = UberHistory.OAuth.me(client)
-
-    IO.inspect user
-
     conn
-    |> put_session(:current_user, user)
     |> put_session(:access_token, client.token.access_token)
     |> redirect(to: "/")
   end
