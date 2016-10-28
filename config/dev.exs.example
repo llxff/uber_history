@@ -43,7 +43,6 @@ config :uber_history, UberHistory.Repo,
   hostname: "localhost",
   pool_size: 10
 
-
 config :uber,
   client_id: "",
   client_secret: "",
