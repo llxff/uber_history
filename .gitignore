@@ -19,5 +19,5 @@ uberhistory.iml
 node_modules
 config/dev.exs
 config/test.exs
-priv/static/css/application.css.map
-priv/static/js/application.js.map
+priv/static/css
+priv/static/js
