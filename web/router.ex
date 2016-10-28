@@ -7,10 +7,7 @@ defmodule UberHistory.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-  end
-
-  pipeline :api do
-    plug :accepts, ["json"]
+    plug :assign_current_user
   end
 
   scope "/", UberHistory do
@@ -19,8 +16,15 @@ defmodule UberHistory.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", UberHistory do
-  #   pipe_through :api
-  # end
+  scope "/auth", UberHistory do
+    pipe_through :browser
+
+    get "/", AuthController, :index
+    get "/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
+  defp assign_current_user(conn, _) do
+    assign(conn, :current_user, get_session(conn, :current_user))
+  end
 end

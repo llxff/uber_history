@@ -42,3 +42,13 @@ config :uber_history, UberHistory.Repo,
   database: "uber_history_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+config :uber,
+  client_id: "",
+  client_secret: "",
+  scope: "profile",
+  redirect_uri: "http://localhost:4000/auth/callback",
+  site: "https://sandbox-api.uber.com",
+  authorize_url: "https://login.uber.com/oauth/v2/authorize",
+  token_url: "https://login.uber.com/oauth/v2/token"
