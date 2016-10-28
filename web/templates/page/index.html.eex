@@ -2,6 +2,29 @@
   <p><%= @current_user["first_name"] %></p>
   <img src="<%= @current_user["picture"] %>"/>
   <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+
+  <p>Количество заказов: <%= @history["count"] %></p>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Дистанция</th>
+        <th>Время заказа</th>
+        <th>Начало поездки</th>
+        <th>Завершение поездки</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= for ride <- @history["history"] do %>
+          <tr>
+            <td><%= ride["distance"] %></td>
+            <td><%= from_timestamp ride["request_time"] %></td>
+            <td><%= from_timestamp ride["start_time"] %></td>
+            <td><%= from_timestamp ride["end_time"] %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
 <% else %>
   <br>
   <br>

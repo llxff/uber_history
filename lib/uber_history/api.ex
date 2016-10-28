@@ -1,6 +1,10 @@
 defmodule UberHistory.Api do
   def me(client) do
-    response OAuth2.Client.get!(client, "/v1/me")
+    OAuth2.Client.get!(client, "/v1/me") |> response
+  end
+
+  def history(client) do
+    OAuth2.Client.get!(client, "/v1.2/history") |> response
   end
 
   defp response(%OAuth2.Response{body: %{"code" => "unauthorized"}}), do: nil
