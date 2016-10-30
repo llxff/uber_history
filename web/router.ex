@@ -11,7 +11,7 @@ defmodule UberHistory.Router do
   end
 
   defp assign_uber_client(conn, _) do
-    client = UberHistory.OAuth.client(get_session(conn, :access_token))
+    client = Uber.OAuth.client(get_session(conn, :access_token))
     assign(conn, :oauth_client, client)
   end
 

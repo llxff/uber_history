@@ -1,8 +1,10 @@
 defmodule UberHistory.AuthController do
   use UberHistory.Web, :controller
 
+  alias Uber.OAuth
+
   def index(conn, _params) do
-    redirect conn, external: UberHistory.OAuth.authorize_url!
+    redirect conn, external: OAuth.authorize_url!
   end
 
   def delete(conn, _params) do
@@ -13,7 +15,7 @@ defmodule UberHistory.AuthController do
   end
 
   def callback(conn, %{"code" => code}) do
-    client = UberHistory.OAuth.get_token!(code: code)
+    client = OAuth.get_token!(code: code)
 
     conn
     |> put_session(:access_token, client.token.access_token)

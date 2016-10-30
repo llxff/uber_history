@@ -1,7 +1,7 @@
 defmodule UberHistory.PageController do
   use UberHistory.Web, :controller
 
-  alias UberHistory.Api
+  alias Uber.Api
 
   def index(conn, _params) do
     client = conn.assigns[:oauth_client]

@@ -1,4 +1,4 @@
-defmodule UberHistory.OAuth do
+defmodule Uber.OAuth do
   use OAuth2.Strategy
 
   def config do

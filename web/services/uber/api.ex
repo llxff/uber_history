@@ -1,4 +1,4 @@
-defmodule UberHistory.Api do
+defmodule Uber.Api do
   def me(client) do
     OAuth2.Client.get!(client, "/v1/me") |> response
   end
