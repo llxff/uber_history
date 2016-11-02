@@ -1,6 +1,7 @@
 import React        from 'react';
 import { connect }  from 'react-redux';
-import LogoutButton from './_logout_button';
+import LogoutButton from '../../components/sessions/logout_button';
+import History      from '../../components/history'
 
 class HomeIndexView extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class HomeIndexView extends React.Component {
         <h1>{ currentUser.first_name } { currentUser.last_name }</h1>
         <img src={ currentUser.picture } />
         <LogoutButton />
+        <History history={this.props.history } />
       </div>
     );
   }
@@ -18,6 +20,7 @@ class HomeIndexView extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
+  history: state.session.history
 });
 
 export default connect(mapStateToProps)(HomeIndexView);
