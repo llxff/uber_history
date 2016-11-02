@@ -1,7 +1,6 @@
 import { routerActions } from 'react-router-redux';
 import Constants         from '../constants';
-import { Socket }        from 'phoenix';
-import { httpGet, httpPost, httpDelete } from '../utils';
+import { httpGet }       from '../utils';
 
 const Actions = {
   currentUser: () => {
