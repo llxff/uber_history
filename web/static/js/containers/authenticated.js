@@ -1,6 +1,7 @@
 import React             from 'react';
 import { connect }       from 'react-redux';
 import { routerActions } from 'react-router-redux';
+import Actions           from '../actions/sessions';
 
 class AuthenticatedContainer extends React.Component {
   componentDidMount() {
@@ -8,7 +9,7 @@ class AuthenticatedContainer extends React.Component {
     const authToken = localStorage.getItem('authToken');
 
     if (authToken && !currentUser) {
-      dispatch(routerActions.push('/sign_in'));
+      dispatch(Actions.currentUser());
     } else if (!authToken) {
       dispatch(routerActions.push('/sign_in'));
     }
@@ -20,8 +21,7 @@ class AuthenticatedContainer extends React.Component {
     if(!currentUser) return false;
 
     return(
-      <div className="main-container">
-        <h3>Authenticated</h3>
+      <div>
         { this.props.children }
       </div>
     );
