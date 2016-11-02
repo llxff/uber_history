@@ -24,10 +24,10 @@ function setCurrentUser(dispatch, user) {
     currentUser: user
   });
 
-  initializeSocket(dispatch, user);
+  initializeSocket(dispatch);
 }
 
-function initializeSocket(dispatch, user) {
+function initializeSocket(dispatch) {
   const socket = new Socket("/socket", {
     params: {
       token: localStorage.getItem("authToken")
@@ -47,6 +47,13 @@ function initializeSocket(dispatch, user) {
     })
   });
 
+  channel.on("receipt:loaded", (msg) => {
+    dispatch({
+      type: Constants.RECEIPT_LOADED,
+      receipt: msg.receipt,
+      request_id: msg.request_id
+    });
+  });
 }
 
 export default Actions;

@@ -1,9 +1,10 @@
-import React from "react";
-import { unix } from "moment";
+import React    from "react";
+import Ride     from "./ride";
 
 export default class History extends React.Component {
   render() {
     const { history } = this.props.history;
+    const { channel, receipts } = this.props;
 
     if(!history.length) { return false }
 
@@ -15,29 +16,22 @@ export default class History extends React.Component {
             <th>Время заказа</th>
             <th>Начало поездки</th>
             <th>Завершение поездки</th>
+            <th>Стоимость поездки</th>
           </tr>
         </thead>
         <tbody>
-          { ::this.renderRides(history) }
+          { ::this.renderRides(history, receipts, channel) }
         </tbody>
       </table>
     )
   }
 
-  renderRides(rides) {
-    return rides.map((ride) => {
-      return (
-        <tr key={ ride.request_id }>
-          <td>{ ride.distance }</td>
-          <td>{ ::this.timestampDate(ride.request_time) }</td>
-          <td>{ ::this.timestampDate(ride.start_time) }</td>
-          <td>{ ::this.timestampDate(ride.end_time) }</td>
-        </tr>
-      )
+  renderRides(history, receipts, channel) {
+    return history.map((request) => {
+      return <Ride key={ request.request_id }
+                   channel={ channel }
+                   request={ request }
+                   receipt={ receipts[request.request_id] }/>
     });
-  }
-
-  timestampDate(unix_timestamp) {
-    return unix(unix_timestamp).format("DD.MM.YYYY HH:mm:ss");
   }
 }
