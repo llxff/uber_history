@@ -34,12 +34,3 @@ export function httpGet(url) {
   .then(checkStatus)
   .then(parseJSON);
 }
-
-export function httpDelete(url) {
-  return fetch(url, {
-    method: 'delete',
-    headers: buildHeaders(),
-  })
-  .then(checkStatus)
-  .then(parseJSON);
-}
