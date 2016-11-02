@@ -4,7 +4,7 @@ defmodule Uber.Api do
   end
 
   def history(client) do
-    response OAuth2.Client.get!(client, "/v1.2/history")
+    OAuth2.Client.get!(client, "/v1.2/history") |> response
   end
 
   defp response(%OAuth2.Response{body: %{"code" => "unauthorized"}}), do: nil
