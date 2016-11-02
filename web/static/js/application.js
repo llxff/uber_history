@@ -1,17 +1,11 @@
-'use strict';
+import React              from 'react';
+import ReactDom           from 'react-dom';
+import { browserHistory } from 'react-router';
+import configureStore     from './store';
+import Root               from './containers/root';
 
-var elements = document.querySelectorAll('[data-submit^=parent]');
-var len = elements.length;
+const store = configureStore(browserHistory);
+const target = document.getElementById('application');
+const node = <Root routerHistory={ browserHistory } store={ store } />;
 
-for (var i = 0; i < len; ++i) {
-    elements[i].addEventListener('click', function (event) {
-        var message = this.getAttribute("data-confirm");
-        if (message === null || confirm(message)) {
-            this.parentNode.submit();
-        };
-        event.preventDefault();
-        return false;
-    }, false);
-}
-
-;
+ReactDom.render(node, target);
