@@ -5,7 +5,6 @@ import LogoutButton from './_logout_button';
 class HomeIndexView extends React.Component {
   render() {
     const { currentUser } = this.props;
-    const csrfToken = localStorage.getItem("csrfToken");
 
     return (
       <div>
