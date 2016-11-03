@@ -16,7 +16,7 @@ defmodule UberHistory.HistoryChannel do
       |> client
       |> Api.receipt(request_id)
 
-    broadcast! socket, "receipt:loaded", %{ request_id: request_id, receipt: ride }
+    push socket, "receipt:loaded", %{ request_id: request_id, receipt: ride }
 
     {:noreply, socket}
   end
