@@ -3,8 +3,8 @@ defmodule Uber.Api do
     OAuth2.Client.get!(client, "/v1/me") |> response
   end
 
-  def history(client) do
-    OAuth2.Client.get!(client, "/v1.2/history") |> response
+  def history(client, offset \\ 0, limit \\ 14) do
+    OAuth2.Client.get!(client, "/v1.2/history?offset=#{ offset }&limit=#{ limit }") |> response
   end
 
   def receipt(client, request_id) do

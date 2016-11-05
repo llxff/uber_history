@@ -4,11 +4,9 @@ defmodule UberHistory.HistoryChannel do
   alias Uber.Api
 
   def join("history", _params, socket) do
-    history = socket
-      |> client
-      |> Api.history
+    history = socket |> client |> History.new |> History.load
 
-    {:ok, %{history: history}, socket}
+    {:ok, %{history: history} , socket}
   end
 
   def handle_in("receipt:load", %{"request_id" => request_id}, socket) do
