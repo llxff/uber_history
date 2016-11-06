@@ -3,7 +3,7 @@ import Constants from '../constants';
 const initialState = {
   socket: null,
   channel: null,
-  history: { count: 0, history: [] },
+  history: [],
   receipts: {}
 };
 
