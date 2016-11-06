@@ -4,7 +4,7 @@ defmodule UberHistory.HistoryChannel do
   alias Uber.Api
 
   def join("history", _params, socket) do
-    history = socket |> client |> History.new |> History.load
+    history = socket |> client |> History.current_week |> History.load
 
     {:ok, %{history: history} , socket}
   end

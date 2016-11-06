@@ -1,35 +1,41 @@
 defmodule History do
-  defstruct client: nil, offset: 0, from: nil, to: nil
+  defstruct client: nil, offset: 0, time_range: nil
 
-  @limit 14
+  @limit 5
 
-  def new(client) do
+  def current_week(client) do
     today = Timex.local
     from = today |> Timex.beginning_of_week |> Timex.to_unix
     to = today |> Timex.end_of_week |> Timex.to_unix
 
-    %History{client: client, from: from, to: to}
+    %History{client: client, time_range: from..to}
   end
 
   def load(history, all \\ []) do
-    rides = Uber.Api.history(history.client, history.offset, @limit)["history"]
-
-    if less(history, List.first(rides)) do
-      if more(history, List.last(rides)) do
-        load(increase_offset(history), all ++ rides)
-      else
-        all ++ Enum.filter(rides, &(less(history, &1) && more(history, &1)))
-      end
-    else
-      []
-    end
+    history.client
+    |> Uber.Api.history(history.offset, @limit)
+    |> Map.fetch!("history")
+    |> Enum.filter(fn ride -> on_this_week?(history, ride) end)
+    |> do_load(all, history)
   end
 
-  defp less(_history, nil), do: false
-  defp less(history, ride), do: ride["request_time"] <= history.to
+  defp on_this_week?(history, ride) do
+    Enum.member?(history.time_range, ride["request_time"])
+  end
 
-  defp more(_history, nil), do: false
-  defp more(history, ride), do: ride["request_time"] >= history.from
+  defp do_load([], all, _history) do
+    all
+  end
+
+  defp do_load(rides, all, _history) when length(rides) < @limit do
+    all ++ rides
+  end
+
+  defp do_load(rides, all, history) do
+    history
+    |> increase_offset
+    |> load(all ++ rides)
+  end
 
   defp increase_offset(history) do
     new_offset = history.offset + @limit
