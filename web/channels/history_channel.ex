@@ -6,7 +6,7 @@ defmodule UberHistory.HistoryChannel do
   def join("history", _params, socket) do
     history = socket |> client |> History.current_week |> History.load
 
-    {:ok, %{history: history} , socket}
+    {:ok, %{history: history}, socket}
   end
 
   def handle_in("receipt:load", %{"request_id" => request_id}, socket) do
