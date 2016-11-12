@@ -1,4 +1,6 @@
 defmodule Uber.Api do
+  require Logger
+
   alias OAuth2.{Client, Response}
 
   def me(client) do
@@ -6,6 +8,8 @@ defmodule Uber.Api do
   end
 
   def history(client, offset \\ 0, limit \\ 14) do
+    Logger.debug "Load uber history"
+
     Client.get!(client, "/v1.2/history?offset=#{ offset }&limit=#{ limit }") |> response
   end
 
