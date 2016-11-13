@@ -4,7 +4,7 @@ defmodule UberHistory.HistoryChannel do
   alias Uber.{Api, OAuth}
 
   def join("history", _params, socket) do
-    {:ok, %{history: history(0, socket), week: 0}, socket}
+    {:ok, %{history: history(socket, 0), weeks_ago: 0}, socket}
   end
 
   def handle_in("receipt:load", %{"request_id" => request_id}, socket) do
@@ -17,20 +17,20 @@ defmodule UberHistory.HistoryChannel do
     {:noreply, socket}
   end
 
-  def handle_in("history:load", %{"week" => week}, socket) do
-    history = history(week, socket)
+  def handle_in("history:load", %{"weeks_ago" => weeks_ago}, socket) do
+    history = history(socket, weeks_ago)
 
-    push socket, "history:loaded", %{history: history, week: week}
+    push socket, "history:loaded", %{history: history, weeks_ago: weeks_ago}
 
     {:noreply, socket}
   end
 
   defp client(socket), do: OAuth.client(socket.assigns.token)
 
-  defp history(week, socket) do
+  defp history(socket, weeks_ago) do
     socket
     |> client
-    |> History.week(week)
+    |> History.weeks_ago(weeks_ago)
     |> History.load
   end
 end

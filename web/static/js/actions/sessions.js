@@ -44,7 +44,7 @@ function initializeSocket(dispatch) {
       socket: socket,
       channel: channel,
       history: response.history,
-      week: response.week
+      weeks_ago: response.weeks_ago
     })
   });
 
@@ -60,7 +60,7 @@ function initializeSocket(dispatch) {
     dispatch({
       type: Constants.HISTORY_LOADED,
       history: msg.history,
-      week: msg.week
+      weeks_ago: msg.weeks_ago
     });
   });
 }

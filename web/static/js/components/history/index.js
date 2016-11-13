@@ -28,8 +28,8 @@ export default class History extends React.Component {
   }
 
   previousWeek() {
-    const { channel, week } = this.props;
-    channel.push("history:load", { week: week + 1 })
+    const { channel, weeks_ago } = this.props;
+    channel.push("history:load", { weeks_ago: weeks_ago + 1 })
   }
 
   renderRides(history, receipts, channel) {

@@ -5,7 +5,7 @@ const initialState = {
   channel: null,
   history: [],
   receipts: {},
-  week: 0
+  weeks_ago: 0
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action = {}) {
         socket: action.socket,
         channel: action.channel,
         history: action.history,
-        week: action.week
+        weeks_ago: action.weeks_ago
       };
 
     case Constants.RECEIPT_LOADED:
@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         history: action.history,
-        week: action.week
+        weeks_ago: action.weeks_ago
       };
 
     default:

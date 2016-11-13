@@ -6,11 +6,11 @@ defmodule History do
   @limit 20
 
 
-  def week(client, week) do
-    Logger.debug "Loading history for #{ week } week ago"
+  def weeks_ago(client, weeks_ago) do
+    Logger.debug "Loading history for #{ weeks_ago } week ago"
 
-    from = beginning_of_week(week)
-    to = end_of_week(week)
+    from = beginning_of_week(weeks_ago)
+    to = end_of_week(weeks_ago)
 
     %History{client: client, from: from, to: to}
   end
