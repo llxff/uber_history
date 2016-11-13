@@ -6,11 +6,11 @@ export default class History extends React.Component {
     const history = this.props.history;
     const { channel, receipts } = this.props;
 
-    if(!history.length) { return false }
-
     return (
       <table className="table table-striped">
-        <caption>{ history.length } поездок за эту неделю</caption>
+        <caption>
+          { history.length } поездок за эту неделю, <a onClick={ ::this.previousWeek }>загрузить за следующую.</a>
+        </caption>
         <thead>
           <tr>
             <th>Дистанция</th>
@@ -25,6 +25,11 @@ export default class History extends React.Component {
         </tbody>
       </table>
     )
+  }
+
+  previousWeek() {
+    const { channel, week } = this.props;
+    channel.push("history:load", { week: week + 1 })
   }
 
   renderRides(history, receipts, channel) {

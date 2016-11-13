@@ -43,7 +43,8 @@ function initializeSocket(dispatch) {
       type: Constants.SOCKET_CONNECTED,
       socket: socket,
       channel: channel,
-      history: response.history
+      history: response.history,
+      week: response.week
     })
   });
 
@@ -52,6 +53,14 @@ function initializeSocket(dispatch) {
       type: Constants.RECEIPT_LOADED,
       receipt: msg.receipt,
       request_id: msg.request_id
+    });
+  });
+
+  channel.on("history:loaded", (msg) => {
+    dispatch({
+      type: Constants.HISTORY_LOADED,
+      history: msg.history,
+      week: msg.week
     });
   });
 }
