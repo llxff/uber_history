@@ -3,13 +3,14 @@ import Ride     from "./ride";
 
 export default class History extends React.Component {
   render() {
-    const { history } = this.props.history;
+    const history = this.props.history;
     const { channel, receipts } = this.props;
 
     if(!history.length) { return false }
 
     return (
       <table className="table table-striped">
+        <caption>{ history.length } поездок за эту неделю</caption>
         <thead>
           <tr>
             <th>Дистанция</th>

@@ -1,12 +1,10 @@
 defmodule UberHistory.HistoryChannel do
   use UberHistory.Web, :channel
 
-  alias Uber.Api
+  alias Uber.{Api, OAuth}
 
   def join("history", _params, socket) do
-    history = socket
-      |> client
-      |> Api.history
+    history = socket |> client |> History.current_week |> History.load
 
     {:ok, %{history: history}, socket}
   end
@@ -21,5 +19,5 @@ defmodule UberHistory.HistoryChannel do
     {:noreply, socket}
   end
 
-  defp client(socket), do: Uber.OAuth.client(socket.assigns.token)
+  defp client(socket), do: OAuth.client(socket.assigns.token)
 end
