@@ -3,13 +3,14 @@ import Ride     from "./ride";
 
 export default class History extends React.Component {
   render() {
-    const { history } = this.props.history;
+    const history = this.props.history;
     const { channel, receipts } = this.props;
-
-    if(!history.length) { return false }
 
     return (
       <table className="table table-striped">
+        <caption>
+          { history.length } поездок за эту неделю, <a onClick={ ::this.previousWeek }>загрузить за следующую.</a>
+        </caption>
         <thead>
           <tr>
             <th>Дистанция</th>
@@ -24,6 +25,11 @@ export default class History extends React.Component {
         </tbody>
       </table>
     )
+  }
+
+  previousWeek() {
+    const { channel, weeks_ago } = this.props;
+    channel.push("history:load", { weeks_ago: weeks_ago + 1 })
   }
 
   renderRides(history, receipts, channel) {
