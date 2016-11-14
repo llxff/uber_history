@@ -5,7 +5,6 @@ defmodule History do
 
   @limit 20
 
-
   def weeks_ago(client, weeks_ago) do
     Logger.debug "Loading history for #{ weeks_ago } week ago"
 
