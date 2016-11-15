@@ -8,7 +8,7 @@ class HomeIndexView extends React.Component {
     const { currentUser } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <h1>{ currentUser.first_name } { currentUser.last_name }</h1>
         <img src={ currentUser.picture } />
         <LogoutButton />
