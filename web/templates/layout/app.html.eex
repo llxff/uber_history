@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Uber History</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/application.css") %>">
   </head>
 
   <body>
     <%= render @view_module, @view_template, assigns %>
-    <div id="application"></div>
+    <div id="application" class="container"></div>
     <script src="<%= static_path(@conn, "/js/application.js") %>"></script>
   </body>
 </html>
