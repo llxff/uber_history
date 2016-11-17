@@ -8,14 +8,20 @@ class HomeIndexView extends React.Component {
     const { currentUser } = this.props;
 
     return (
-      <div className="container">
-        <h1>{ currentUser.first_name } { currentUser.last_name }</h1>
-        <img src={ currentUser.picture } />
-        <LogoutButton />
-        <History history={ this.props.history }
-                 receipts={ this.props.receipts }
-                 channel={ this.props.channel }
-                 weeks_ago={ this.props.weeks_ago } />
+      <div className="row">
+        <div className="col-lg-3">
+          <div className="text-center">
+            <img className="img-circle" src={ currentUser.picture } />
+            <h5>{ currentUser.first_name } { currentUser.last_name }</h5>
+            <LogoutButton />
+          </div>
+        </div>
+        <div className="col-lg-9">
+          <History history={ this.props.history }
+                   receipts={ this.props.receipts }
+                   channel={ this.props.channel }
+                   weeks_ago={ this.props.weeks_ago } />
+        </div>
       </div>
     );
   }
