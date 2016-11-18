@@ -11,7 +11,7 @@ class HomeIndexView extends React.Component {
       <div className="row">
         <div className="col-lg-3">
           <div className="text-center">
-            <img className="img-circle" src={ currentUser.picture } />
+            <img className="avatar img-circle" src={ currentUser.picture } />
             <h5>{ currentUser.first_name } { currentUser.last_name }</h5>
             <LogoutButton />
           </div>
