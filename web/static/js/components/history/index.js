@@ -9,7 +9,8 @@ export default class History extends React.Component {
     return (
       <table className="table table-striped">
         <caption>
-          { history.length } поездок за эту неделю, <a onClick={ ::this.previousWeek }>загрузить за следующую.</a>
+          { history.length } поездок за неделю,&nbsp;
+          <a className="fake-link" onClick={ ::this.previousWeek }>загрузить за следующую.</a>
         </caption>
         <thead>
           <tr>
