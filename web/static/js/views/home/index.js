@@ -9,14 +9,14 @@ class HomeIndexView extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-md-2">
           <div className="text-center">
             <img className="avatar img-circle" src={ currentUser.picture } />
             <h5>{ currentUser.first_name } { currentUser.last_name }</h5>
             <LogoutButton />
           </div>
         </div>
-        <div className="col-lg-9">
+        <div className="col-md-10">
           <History history={ this.props.history }
                    receipts={ this.props.receipts }
                    channel={ this.props.channel }
