@@ -10,7 +10,7 @@ export default class History extends React.Component {
       <table className="table table-striped">
         <caption>
           { history.length } поездок за неделю,&nbsp;
-          <a className="fake-link" onClick={ ::this.previousWeek }>загрузить за следующую.</a>
+          <a className="fake-link" onClick={ ::this.previousWeek }>{ ::this.previousWeekCaption() }</a>
         </caption>
         <thead>
           <tr>
@@ -26,6 +26,17 @@ export default class History extends React.Component {
         </tbody>
       </table>
     )
+  }
+
+  previousWeekCaption() {
+    const { weeks_ago } = this.props;
+
+    if(weeks_ago) {
+      return `загрузить за ${ weeks_ago + 1 } неделю назад`;
+    }
+    else {
+      return "загрузить за 1 неделю назад";
+    }
   }
 
   previousWeek() {

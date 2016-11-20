@@ -1,24 +1,49 @@
 defmodule History do
   require Logger
+  import Ecto.Query, only: [from: 2]
 
-  defstruct client: nil, offset: 0, from: nil, to: nil
+  alias UberHistory.{Ride, Repo}
+
+  defstruct client: nil, uuid: nil, offset: 0, from: nil, to: nil, weeks_ago: 0
 
   @limit 20
 
-  def weeks_ago(client, weeks_ago) do
+  def weeks_ago(client, uuid, weeks_ago) do
     Logger.debug "Loading history for #{ weeks_ago } week ago"
 
     from = beginning_of_week(weeks_ago)
     to = end_of_week(weeks_ago)
 
-    %History{client: client, from: from, to: to}
+    %History{client: client, uuid: uuid, from: from, to: to, weeks_ago: weeks_ago}
   end
 
-  def load(history, all \\ []) do
+  def load(history) do
+    if history.weeks_ago == 0 do
+      load(history, [])
+    else
+      case load_from_local_storage(history) do
+        [] ->
+          load(history, []) |> save_into_local_storage(history.uuid)
+        rides ->
+          rides
+       end
+    end
+  end
+
+  def load(history, all) do
     history.client
     |> Uber.Api.history(history.offset, @limit)
     |> Map.fetch!("history")
     |> do_load(all, history)
+  end
+
+  defp load_from_local_storage(history) do
+    query = from r in Ride,
+      where: ^history.from <= r.request_time and r.request_time <= ^history.to and r.rider_id == ^history.uuid,
+      order_by: [desc: r.request_time],
+      select: r
+
+    Repo.all(query)
   end
 
   defp do_load([], all, _history) do
@@ -89,5 +114,22 @@ defmodule History do
     new_offset = history.offset + @limit
 
     %History{ history | offset: new_offset}
+  end
+
+  defp save_into_local_storage(rides, uuid) do
+    changeset = rides |> Enum.map(&(atomify_map(&1, uuid)))
+
+    Logger.debug "Save #{ Enum.count(rides) } rides into database"
+
+    Repo.insert_all(Ride, changeset)
+
+    rides
+  end
+
+  defp atomify_map(map, uuid) do
+    map
+    |> Enum.reduce(%{}, fn ({key, val}, acc) -> Map.put(acc, String.to_atom(key), val) end)
+    |> Map.take(Ride.required_fields)
+    |> Map.put(:rider_id, uuid)
   end
 end
