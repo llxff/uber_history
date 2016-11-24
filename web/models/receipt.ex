@@ -32,4 +32,8 @@ defmodule UberHistory.Receipt do
     |> cast(params, @fields)
     |> validate_required([:request_id, :total_charged])
   end
+
+  def new_changeset(params) do
+    changeset(%UberHistory.Receipt{}, params)
+  end
 end
