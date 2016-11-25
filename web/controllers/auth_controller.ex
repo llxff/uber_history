@@ -21,4 +21,10 @@ defmodule UberHistory.AuthController do
     |> put_session(:access_token, client.token.access_token)
     |> redirect(to: "/")
   end
+
+    def callback(conn, %{"error" => "invalid_scope"}) do
+      conn
+      |> put_flash(:error, "К сожалению, вы пока не можете использовать приложение 😭")
+      |> redirect(to: "/")
+    end
 end
