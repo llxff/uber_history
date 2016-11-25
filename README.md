@@ -2,6 +2,8 @@
 
 How much do you spend with Uber?
 
+Current version https://wiserider.herokuapp.com
+
 To start application:
 
   * Copy configuration file with `cp config/dev.exs.example config/dev.exs`
