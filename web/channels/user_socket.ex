@@ -3,8 +3,8 @@ defmodule UberHistory.UserSocket do
 
   channel "history", UberHistory.HistoryChannel
 
-  transport :websocket, Phoenix.Transports.WebSocket
-  transport :longpoll, Phoenix.Transports.LongPoll
+  transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000
+  transport :longpoll, Phoenix.Transports.LongPoll, timeout: 45_000
 
   def connect(%{"token" => token}, socket) do
     client = Uber.OAuth.client(token)
