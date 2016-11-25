@@ -39,7 +39,8 @@ defmodule UberHistory.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:oauth2, "~> 0.8"},
-     {:timex, "~> 3.0"}]
+     {:timex, "~> 3.0"},
+     {:money, "~> 1.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

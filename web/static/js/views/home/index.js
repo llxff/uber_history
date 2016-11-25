@@ -20,7 +20,8 @@ class HomeIndexView extends React.Component {
           <History history={ this.props.history }
                    receipts={ this.props.receipts }
                    channel={ this.props.channel }
-                   weeks_ago={ this.props.weeks_ago } />
+                   weeks_ago={ this.props.weeks_ago }
+                   spent_amount={ this.props.spent_amount } />
         </div>
       </div>
     );
@@ -32,7 +33,8 @@ const mapStateToProps = (state) => ({
   history: state.history.history,
   receipts: state.history.receipts,
   channel: state.history.channel,
-  weeks_ago: state.history.weeks_ago
+  weeks_ago: state.history.weeks_ago,
+  spent_amount: state.history.spent_amount
 });
 
 export default connect(mapStateToProps)(HomeIndexView);

@@ -12,11 +12,11 @@ defmodule ReceiptHistory do
   end
 
   defp load_and_save_receipt(client, request_id) do
-    receipt = Api.receipt(client, request_id)
+    changeset = client
+      |> Api.receipt(request_id)
+      |> Receipt.new_changeset
 
-    receipt
-    |> Receipt.new_changeset
-    |> Repo.insert
+    {:ok, receipt } = Repo.insert(changeset)
 
     receipt
   end

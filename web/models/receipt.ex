@@ -1,4 +1,6 @@
 defmodule UberHistory.Receipt do
+  alias UberHistory.Receipt
+
   use UberHistory.Web, :model
 
   @fields [
@@ -13,8 +15,6 @@ defmodule UberHistory.Receipt do
     :distance_label
   ]
 
-  @derive { Poison.Encoder, only: @fields }
-
   schema "receipts" do
     field :request_id, Ecto.UUID
     field :subtotal, :string
@@ -27,6 +27,8 @@ defmodule UberHistory.Receipt do
     field :distance_label, :string
   end
 
+  def fields, do: @fields
+
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @fields)
@@ -35,5 +37,26 @@ defmodule UberHistory.Receipt do
 
   def new_changeset(params) do
     changeset(%UberHistory.Receipt{}, params)
+  end
+
+  def encode_model(receipt) do
+    Map.put(receipt, :total_charged_amount, total_charged_amount(receipt))
+  end
+
+  defp total_charged_amount(receipt) do
+    receipt.total_charged
+    |> Money.parse(receipt.currency_code)
+    |> elem(1)
+    |> Money.to_string(symbol: false, separator: "")
+    |> String.to_float
+  end
+
+  defimpl Poison.Encoder, for: Receipt do
+    def encode(receipt, options) do
+      receipt
+      |> Receipt.encode_model
+      |> Map.take([:total_charged_amount | Receipt.fields])
+      |> Poison.Encoder.Map.encode(options)
+    end
   end
 end

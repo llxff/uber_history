@@ -9,7 +9,7 @@ export default class History extends React.Component {
     return (
       <table className="table table-striped">
         <caption>
-          { history.length } поездок за неделю,&nbsp;
+          { history.length } поездок за неделю, потрачено { ::this.spentAmount() },&nbsp;
           <a className="fake-link" onClick={ ::this.previousWeek }>{ ::this.previousWeekCaption() }</a>
         </caption>
         <thead>
@@ -51,5 +51,23 @@ export default class History extends React.Component {
                    request={ request }
                    receipt={ receipts[request.request_id] }/>
     });
+  }
+
+  spentAmount() {
+    const { spent_amount } = this.props;
+    const spent_amount_arr = [];
+    const spent_amounts = Object.entries(spent_amount);
+
+    if (spent_amounts.length) {
+      spent_amounts.forEach(function([currency, amount]) {
+        spent_amount_arr.push(`${ amount } ${ currency }`)
+      });
+
+      return spent_amount_arr.join(', ');
+    }
+    else {
+      return "0";
+    }
+
   }
 }

@@ -5,6 +5,7 @@ const initialState = {
   channel: null,
   history: [],
   receipts: {},
+  spent_amount: {},
   weeks_ago: 0
 };
 
@@ -20,20 +21,25 @@ export default function reducer(state = initialState, action = {}) {
       };
 
     case Constants.RECEIPT_LOADED:
+      const receipt =  action.receipt;
+      const spent_amount = state.spent_amount[receipt.currency_code] || 0;
+
+      state.spent_amount[receipt.currency_code] = spent_amount + receipt.total_charged_amount;
+      state.receipts[action.request_id] = receipt;
+
       return {
         ...state,
-        receipts: Object.assign(
-          {},
-          state.receipts,
-          { [action.request_id]: action.receipt }
-        )
+        spent_amount: Object.assign({}, state.spent_amount),
+        receipts: Object.assign({}, state.receipts)
       };
 
     case Constants.HISTORY_LOADED:
       return {
         ...state,
         history: action.history,
-        weeks_ago: action.weeks_ago
+        weeks_ago: action.weeks_ago,
+        receipts: {},
+        spent_amount: {}
       };
 
     default:
