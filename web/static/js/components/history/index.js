@@ -56,11 +56,11 @@ export default class History extends React.Component {
   spentAmount() {
     const { spent_amount } = this.props;
     const spent_amount_arr = [];
-    const spent_amounts = Object.entries(spent_amount);
+    const currencies = Object.keys(spent_amount);
 
-    if (spent_amounts.length) {
-      spent_amounts.forEach(function([currency, amount]) {
-        spent_amount_arr.push(`${ amount } ${ currency }`)
+    if (currencies.length) {
+      currencies.forEach(function(currency) {
+        spent_amount_arr.push(`${ spent_amount[currency] } ${ currency }`)
       });
 
       return spent_amount_arr.join(', ');
