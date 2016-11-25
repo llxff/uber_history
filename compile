@@ -1,0 +1,4 @@
+echo "Compile Webpack"
+
+./node_modules/.bin/webpack --config ./webpack.config.js --progress --colors
+mix phoenix.digest
