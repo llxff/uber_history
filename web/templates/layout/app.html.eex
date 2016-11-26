@@ -12,8 +12,9 @@
   <body>
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <div id="application"></div>
+
     <%= render @view_module, @view_template, assigns %>
-    <div id="application" class="container-fluid"></div>
     <script src="<%= static_path(@conn, "/js/application.js") %>"></script>
   </body>
 </html>

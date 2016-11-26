@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 class SessionsNew extends React.Component {
   render() {
     return (
-      <div>
-        <a className="btn btn-primary btn-lg" href="/auth">
-          <i className="fa fa-google"></i>
-          Sign in with Uber
-        </a>
+      <div className="vertical-center">
+        <div className="container-fluid">
+          <h1>Сколько Вы тратите с Uber?</h1>
+          <div className="sign-in">
+            <a className="button" href="/auth">Узнать</a>
+          </div>
+        </div>
       </div>
     );
   }
