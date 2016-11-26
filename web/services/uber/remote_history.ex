@@ -1,5 +1,5 @@
 defmodule RemoteHistory do
-  @limit 20
+  @limit 49
 
   def load(query) do
     load_from_uber([], query, 0)

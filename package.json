@@ -33,6 +33,7 @@
     "invariant": "^2.2.1",
     "isomorphic-fetch": "^2.2.1",
     "es6-promise": "^4.0.5",
-    "moment": "^2.15.2"
+    "moment": "^2.15.2",
+    "pluralize-ru": "^1.0.1"
   }
 }

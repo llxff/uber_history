@@ -8,7 +8,7 @@ export default class LogoutButton extends React.Component {
       <form action="/auth/logout" className="link" method="post">
         <input name="_method" type="hidden" value="delete" />
         <input name="_csrf_token" type="hidden" value={ csrfToken } />
-        <button className="btn btn-danger btn-xs">Log out</button>
+        <button className="button">Выйти</button>
       </form>
     );
   }

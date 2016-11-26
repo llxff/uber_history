@@ -25,12 +25,6 @@ defmodule UberHistory.Router do
   defp fetch_token([token]), do: token
   defp fetch_token(_), do: nil
 
-  scope "/", UberHistory do
-    pipe_through :browser
-
-    get "/", PageController, :index
-  end
-
   scope "/auth", UberHistory do
     pipe_through :browser
 
@@ -45,5 +39,11 @@ defmodule UberHistory.Router do
     scope "/v1" do
       get "/current_user", CurrentUserController, :show
     end
+  end
+
+  scope "/", UberHistory do
+    pipe_through :browser
+
+    get "/*path", PageController, :index
   end
 end
