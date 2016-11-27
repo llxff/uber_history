@@ -7,7 +7,7 @@ class History extends React.Component {
   render() {
     const { history_loading, history } = this.props;
     const captionClass = history_loading ? "blur" : null;
-    console.log('comp', history_loading);
+
     this.loadReceipts();
 
     if(history.length) {

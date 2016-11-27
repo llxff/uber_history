@@ -24,8 +24,6 @@ export default function reducer(state = initialState, action = {}) {
       };
 
     case Constants.HISTORY_LOADING:
-      console.log("loading");
-
       return {
         ...state,
         history_loading: true,
@@ -47,7 +45,6 @@ export default function reducer(state = initialState, action = {}) {
       };
 
     case Constants.HISTORY_LOADED:
-      console.log("loaded");
       return {
         ...state,
         history: action.history,
