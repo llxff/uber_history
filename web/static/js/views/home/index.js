@@ -7,7 +7,7 @@ export default class HomeIndexView extends React.Component {
     return (
       <div>
         <Header />
-        <div className="vertical-center col-lg-1">
+        <div className="vertical-center">
           <div className="container-fluid">
             <History />
           </div>
