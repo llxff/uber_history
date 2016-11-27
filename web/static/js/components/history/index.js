@@ -1,20 +1,23 @@
-import React     from "react";
-import pluralize from "pluralize-ru";
-import Actions   from "../../actions/history";
+import React       from "react";
+import pluralize   from "pluralize-ru";
+import Actions     from "../../actions/history";
+import { connect } from 'react-redux';
 
-export default class History extends React.Component {
+class History extends React.Component {
   render() {
-    const history = this.props.history;
+    const { history_loading, history } = this.props;
+    const captionClass = history_loading ? "blur" : null;
+    console.log('comp', history_loading);
     this.loadReceipts();
 
     if(history.length) {
       return (
-        <h1>{ this.ridesCountCaption() } { this.previousWeekLink() } за { this.spentAmount() }</h1>
+        <h1 className={ captionClass }>{ this.ridesCountCaption() } { this.previousWeekLink() } за { this.spentAmount() }</h1>
       );
     }
     else {
       return (
-        <h1>{ this.previousWeekLink() } поездок не было</h1>
+        <h1 className={ captionClass }>{ this.previousWeekLink() } поездок не было</h1>
       );
     }
   }
@@ -41,8 +44,11 @@ export default class History extends React.Component {
   }
 
   previousWeek() {
-    const { channel, weeks_ago } = this.props;
-    channel.push("history:load", { weeks_ago: weeks_ago + 1 })
+    const { dispatch, weeks_ago, channel, history_loading } = this.props;
+
+    if (!history_loading) {
+      dispatch(Actions.loadHistory(weeks_ago, channel));
+    }
   }
 
   previousWeekCaption() {
@@ -88,3 +94,14 @@ export default class History extends React.Component {
     return history.length && !Object.keys(receipts).length
   }
 }
+
+const mapStateToProps = (state) => ({
+  history: state.history.history,
+  receipts: state.history.receipts,
+  channel: state.history.channel,
+  weeks_ago: state.history.weeks_ago,
+  spent_amount: state.history.spent_amount,
+  history_loading: state.history.history_loading
+});
+
+export default connect(mapStateToProps)(History);
