@@ -12,7 +12,7 @@ defmodule UberHistory.HistoryChannel do
   def handle_in("receipt:load", %{"request_id" => request_id}, socket) do
     receipt = socket
       |> client
-      |> ReceiptHistory.load(request_id)
+      |> ReceiptHistory.load(request_id, socket.assigns.uuid)
 
     push socket, "receipt:loaded", %{request_id: request_id, receipt: receipt}
 

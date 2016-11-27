@@ -5,6 +5,7 @@ defmodule UberHistory.Receipt do
 
   @fields [
     :request_id,
+    :rider_id,
     :subtotal,
     :total_charged,
     :total_owed,
@@ -17,6 +18,7 @@ defmodule UberHistory.Receipt do
 
   schema "receipts" do
     field :request_id, Ecto.UUID
+    field :rider_id, Ecto.UUID
     field :subtotal, :string
     field :total_charged, :string
     field :total_owed, :string
@@ -33,10 +35,6 @@ defmodule UberHistory.Receipt do
     struct
     |> cast(params, @fields)
     |> validate_required([:request_id, :total_charged])
-  end
-
-  def new_changeset(params) do
-    changeset(%UberHistory.Receipt{}, params)
   end
 
   def encode_model(receipt) do

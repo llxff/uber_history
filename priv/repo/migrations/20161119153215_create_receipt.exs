@@ -4,6 +4,7 @@ defmodule UberHistory.Repo.Migrations.CreateReceipt do
   def change do
     create table(:receipts) do
       add :request_id, :uuid
+      add :rider_id, :uuid
       add :subtotal, :string
       add :total_charged, :string
       add :total_owed, :string

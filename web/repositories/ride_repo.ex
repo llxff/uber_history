@@ -18,6 +18,11 @@ defmodule UberHistory.RideRepo do
     Repo.insert_all(Ride, changeset)
   end
 
+  def delete_of_rider(rider_id) do
+    from(r in Ride, where: r.rider_id == ^rider_id)
+    |> Repo.delete_all
+  end
+
   defp atomify_map(map) do
     map
     |> Enum.reduce(%{}, fn ({key, val}, acc) -> Map.put(acc, String.to_atom(key), val) end)
