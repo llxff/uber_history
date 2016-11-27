@@ -10,10 +10,10 @@ class Header extends React.Component {
     return (
       <div className="header">
         <div className="row">
-          <div className="col-lg-2">
+          <div className="col-xs-2">
             <Spinner />
           </div>
-          <div className="user-info col-lg-10">
+          <div className="user-info col-xs-10">
             <img className="avatar img-circle" src={ currentUser.picture } />
             <span> </span>
             <span>{ currentUser.first_name } { currentUser.last_name }</span>
