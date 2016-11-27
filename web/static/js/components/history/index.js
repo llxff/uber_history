@@ -1,5 +1,6 @@
 import React     from "react";
 import pluralize from "pluralize-ru";
+import Actions   from "../../actions/history";
 
 export default class History extends React.Component {
   render() {
@@ -74,12 +75,10 @@ export default class History extends React.Component {
   }
 
   loadReceipts() {
-    const { history, receipts, channel } = this.props;
+    const { history, dispatch, channel } = this.props;
 
     if (this.receiptsNotLoaded()) {
-      history.forEach(function(request) {
-        channel.push("receipt:load", { request_id: request.request_id });
-      });
+      dispatch(Actions.loadRequests(history, channel));
     }
   }
 

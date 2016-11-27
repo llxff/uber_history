@@ -22,7 +22,8 @@ class HomeIndexView extends React.Component {
                      receipts={ this.props.receipts }
                      channel={ this.props.channel }
                      weeks_ago={ this.props.weeks_ago }
-                     spent_amount={ this.props.spent_amount } />
+                     spent_amount={ this.props.spent_amount }
+                     dispatch={ this.props.dispatch } />
           </div>
         </div>
       </div>
