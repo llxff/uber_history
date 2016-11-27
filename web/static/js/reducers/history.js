@@ -20,7 +20,8 @@ export default function reducer(state = initialState, action = {}) {
         channel: action.channel,
         history: action.history,
         weeks_ago: action.weeks_ago,
-        history_loading: false
+        history_loading: false,
+        receipts_loading: action.history.length != 0
       };
 
     case Constants.HISTORY_LOADING:
@@ -52,7 +53,7 @@ export default function reducer(state = initialState, action = {}) {
         receipts: {},
         spent_amount: {},
         history_loading: false,
-        receipts_loading: true
+        receipts_loading: action.history.length != 0
       };
 
     default:
