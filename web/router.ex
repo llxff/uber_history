@@ -44,8 +44,6 @@ defmodule UberHistory.Router do
   scope "/", UberHistory do
     pipe_through :browser
 
-    post "/.well-known/acme-challenge/vd93EcR4zirDOteHXk_AhAqPbIiEFsvFV8PiWkJcp5E", SSLController, :index
-    get  "/.well-known/acme-challenge/vd93EcR4zirDOteHXk_AhAqPbIiEFsvFV8PiWkJcp5E", SSLController, :index
     get "/*path", PageController, :index
   end
 end
