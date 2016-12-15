@@ -4,6 +4,6 @@ defmodule UberHistory.SSLController do
   def index(conn, _params) do
     conn
     |> put_status(:ok)
-    |> text("4gERNJbL0LVMsDI5_DQxmXmoTgfD4vnnZbekWoIB_74.dKGx3qk71ICwaGVHtROF_8urSZRWv6WpDNhBQNk92V4")
+    |> text("vd93EcR4zirDOteHXk_AhAqPbIiEFsvFV8PiWkJcp5E.dKGx3qk71ICwaGVHtROF_8urSZRWv6WpDNhBQNk92V4")
   end
 end
