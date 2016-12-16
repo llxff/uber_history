@@ -20,6 +20,6 @@ config :uber,
   client_secret: System.get_env("UBER_CLIENT_SECRET"),
   scope: "profile history request_receipt",
   redirect_uri: "https://wiserider.ru/auth/callback",
-  site: "https://sandbox-api.uber.com",
+  site: "https://api.uber.com",
   authorize_url: "https://login.uber.com/oauth/v2/authorize",
   token_url: "https://login.uber.com/oauth/v2/token"

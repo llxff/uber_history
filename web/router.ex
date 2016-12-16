@@ -44,6 +44,7 @@ defmodule UberHistory.Router do
   scope "/", UberHistory do
     pipe_through :browser
 
+    get "/cp", PageController, :cp
     get "/*path", PageController, :index
   end
 end
